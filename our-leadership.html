@@ -1,0 +1,87 @@
+---
+layout: default
+---
+<style>
+.staff-content img {
+    margin: 20px;
+}
+</style>
+<!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li class="active">Our Leadershp</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Our Leadership</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+        {% for leader in site.data.leadership %}
+        {% if  leader.Is_Senior_Pastor %}
+        <div class="col-sm-12 col-md-8" >
+            <div class="grid-item staff-item" style="background: #f8f7f3;">
+              <div class="grid-item-inner">
+                <div class="media-box" style=" padding-left: 30px; padding-right: 30px; padding-top: 30px;"> <img src="{{leader.Photo[0].url}}" alt=""> </div>
+                <div class="grid-content" style="padding-left: 30px;">
+                  <h3 style="margin-bottom: 0;">{{ leader.Leader_Name }}</h3>
+                  <h4 style="margin-bottom: 0;"><em>{{leader.Position}}</em></h4>
+                  <hr style="margin-top: 0;">
+                  <div class="staff-content">
+                  {% if  leader.Content %}
+                  {{leader.Content | markdownify }}
+                  {% endif %}
+                  </div><!--/staff-content-->
+                  <div class="clear" style="clear: both;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        {% else %}
+        <div class="col-md-4 col-sm-6">
+            <div class="grid-item staff-item">
+              <div class="grid-item-inner">
+                <div class="media-box"> <img src="http://placehold.it/500x300&amp;text=IMAGE+PLACEHOLDER" alt=""> </div>
+                <div class="grid-content">
+                  <h3 style="margin-bottom: 0;">{{ leader.Leader_Name }}</h3>
+                  <h4 style="margin-bottom: 0;"><em>{{leader.Position}}</em></h4>
+                  <hr style="margin-top: 0;">
+                 <div class="staff-content">
+                  {% if  leader.Content %}
+                  {{leader.Content | markdownify }}
+                  {% endif %}
+                  </div><!--/staff-content-->
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+          
+          
+          
+        </div><!--/row-->
+      </div><!--/container-->
+    </div><!--/content full-->
+  </div><!--/main-->
