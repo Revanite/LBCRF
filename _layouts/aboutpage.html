@@ -1,0 +1,49 @@
+---
+layout: default
+---
+
+ <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax" 
+  {% if page.featured_image %}
+{% for img in page.featured_image %}
+  style="background-image:url({{img.url}}); background-size: cover; background-position: center bottom; "
+  {% endfor %}
+{% endif %}
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <ol class="breadcrumb">
+            <li><a href="{{site.url}}/">Home</a></li>
+            <li>About Us</li>
+            <li class="active"><a href="#">{{page.title}}</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h1>{{page.title}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            {% if page.body_content %}
+        {{page.body_content | markdownify }}
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>

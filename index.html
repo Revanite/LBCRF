@@ -1,0 +1,146 @@
+---
+layout: default
+---
+
+  <!-- Start Hero Slider -->
+  <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="yes" data-arrows="yes" data-style="fade" data-pause="yes">
+    <ul class="slides">
+      {% for slider in site.data.slider %}
+      <li class=" parallax" {% for img in slider.image  limit: 1 %} style="background-image:url({{img.url}});"{% endfor %}>{% if  slider.url %}
+        <a href="{{slider.url}}"></a>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <!-- End Hero Slider --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row"> 
+          <!-- Start Featured Blocks -->
+          <div class="featured-blocks clearfix">
+            <div class="col-md-4 col-sm-4 featured-block"> <a href="{{site.data.home[0].Link_1_URL}}" class="img-thumbnail">{% for img in site.data.home[0].LInk_1_Image %}
+              <img src="{{img.url}}" alt="staff">
+              {% endfor %}
+               <strong>{{site.data.home[0].Link_1_Text}}</strong> <span class="more">read more</span> </a> </div>
+               <div class="col-md-4 col-sm-4 featured-block"> <a href="{{site.data.home[0].Link_2_URL}}" class="img-thumbnail">{% for img in site.data.home[0].LInk_2_Image %}
+              <img src="{{img.url}}" alt="staff">
+              {% endfor %}
+               <strong>{{site.data.home[0].Link_2_Text}}</strong> <span class="more">read more</span> </a> </div>
+               <div class="col-md-4 col-sm-4 featured-block"> <a href="{{site.data.home[0].Link_3_URL}}" class="img-thumbnail">{% for img in site.data.home[0].LInk_3_Image %}
+              <img src="{{img.url}}" alt="staff">
+              {% endfor %}
+               <strong>{{site.data.home[0].Link_3_Text}}</strong> <span class="more">read more</span> </a> </div>
+           
+          </div>
+          <!-- End Featured Blocks --> 
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-sm-6"> 
+            <!-- Blog -->
+            <div class="listing post-listing">
+              <header class="listing-header">
+                <h3>Pastor's Blog:</h3>
+              </header>
+              <section class="listing-cont">
+                <ul>
+                  {% for post in site.data.blog  limit: 2 %}
+                  <li class="item post">
+                    <div class="row">
+                      <div class="col-md-4"> 
+                        {% if  post.featured_image %}
+                        {% for img in post.featured_image  limit:1 %}
+                        <a href="{{ post.title | datapage_url: 'blog-posts' | prepend: site.baseurl | prepend: site.url }}" class="media-box"> <img src="{{img.url}}" alt="" class="img-thumbnail"> </a>
+                        {% endfor %}
+                        {% else %}
+                         <a href="{{ post.title | datapage_url: 'blog-posts' | prepend: site.baseurl | prepend: site.url }}" class="media-box"> <img src="{{site.default_blog_image}}" alt="" class="img-thumbnail"> </a>
+                        {% endif %}
+                        </div>
+                      <div class="col-md-8">
+                        <div class="post-title">
+                          <h2><a href="{{ post.title | datapage_url: 'blog-posts' | prepend: site.baseurl | prepend: site.url }}">{{post.title}}</a></h2>
+                          <span class="meta-data"><i class="fa fa-calendar"></i> on {{post.date_added| date: "%B %-d, %Y" }}</span></div>
+                        {{post.body_content | truncate: 200 | markdownify }}
+                        <a href="{{ post.title | datapage_url: 'blog-posts' | prepend: site.baseurl | prepend: site.url }}" class="btn btn-primary">Read More</a>
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </section>
+            </div>
+          </div>
+          <!-- Start Sidebar -->
+          <div class="col-md-4 col-sm-6"> 
+            <!-- Latest Sermons -->
+            <div class="listing sermons-listing">
+              <header class="listing-header">
+                <h3>Recent Sermons</h3>
+              </header>
+              <section class="listing-cont">
+                <ul>
+                  {% for sermon in site.data.sermons  limit: 1 %}
+                  
+                  <li class="item sermon featured-sermon"> <span class="date">{{sermon.date}}</span>
+                    <h4><a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}">{{sermon.title}}</a></h4>
+                    <div class="featured-sermon-video">
+                      {% if sermon.series_featured_image %}
+                    {% for img in sermon.series_featured_image %}
+                      <a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}" class="media-box"> <img src="{{img.url}}" alt="" class="img-thumbnail"> </a>
+                      {% endfor %}
+                {% else %}
+                    <img src="http://placehold.it/560x315?text=sermons+graphic" alt="">
+                {% endif %}
+                    </div>
+                    {% if  sermon.body_content %}
+                    {{sermon.body_content | markdownify | truncate: 200 }}
+                    {% else %}
+                    <p>Click to listen to this and other sermons.</p>
+                    {% endif %}
+                    <div class="sermon-actions"> {% if sermon.sermon_mp3 %}
+                    {% for item in sermon.sermon_mp3 %} <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
+                      <i class="fa fa-headphones"></i></a> 
+                       {% endfor %}
+                    {% endif %}
+                    {% if sermon.handout %}
+                    {% for item in sermon.handout %}
+                      <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Read online"><i class="fa fa-file-text-o"></i></a> 
+                      {% endfor %}
+                    {% endif %}
+                    {% if sermon.slides %}
+                    {% for item in sermon.slides %}
+                     <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Download PDF"><i class="fa fa-file-powerpoint-o"></i></a> </div>
+                    {% endfor %}
+                    {% endif %}
+                     
+                  </li>
+                  {% endfor %}
+                  {% for sermon in site.data.sermons  limit: 3 | offset: 1 %}
+                  <li class="item sermon">
+                    <h2 class="sermon-title"><a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}">{{sermon.title}}</a></h2>
+                    <span class="meta-data"><i class="fa fa-calendar"></i> on {{sermon.date}}</span> </li>
+                    {% endfor %}
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Start Featured Gallery -->
+  <div class="featured-gallery">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-3">
+          <h4>Recent Photos from our Church:</h4>
+          <a href="{{site.url}}gallery.html" class="btn btn-default btn-lg">More Galleries</a> </div>
+           {% for group in site.data.photos  limit: 1 %}
+            {% for img in group.gallery  limit: 3 %}
+        <div class="col-md-3 col-sm-3 post format-image"> <a href="{{img.url}}" class="media-box" data-rel="prettyPhoto[Gallery]"> <img src="{{img.thumbnails.large.url}}" alt=""> </a> </div>
+         {% endfor %} <!--/end individual images-->
+          {% endfor %} <!--/ end gallery loop -->  
+      </div>
+    </div>
+  </div>
+  <!-- End Featured Gallery --> 

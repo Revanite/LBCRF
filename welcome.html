@@ -1,0 +1,77 @@
+---
+layout: default
+---
+  <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Welcome</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{site.data.welcome2[0].Page_Heading}} </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 featured-image">
+              {% if  site.data.welcome2[0].Featured_Image %}
+              {% for img in site.data.welcome2[0].Featured_Image %}
+              <img src="{{img.url}}" alt="">
+              {% endfor %}
+              {% endif %}
+          </div><!--/featured-image-->
+          <div class="col-md-10 col-md-offset-1">
+            {% for section in site.data.welcome %}
+              <div class="content-row">
+                <h2 style="text-align: center; margin-top: 40px;">{{section.Section_title}}</h2>
+                <div class="row">
+                  {% if section.Image %}
+                    
+                    <div class="col-md-8">
+                        {% if  section.Content %}
+                {{section.Content | markdownify }}
+                {% endif %}
+                    </div><!--/col-md-8-->
+                    <div class="col-md-4">
+                      {% for img in section.Image %}
+                         <img src="{{img.url}}" alt="" class="thumbnail">
+                         {% endfor %}
+                    </div><!--/col-md-4-->
+                  {% else %}
+                {% if  section.Content %}
+                {{section.Content | markdownify }}
+                {% endif %}
+                {% endif %}
+                </div><!--/row-->
+              </div><!--/content-row-->
+              <hr>
+              {% endfor %}
+
+              <div class="content-row">
+                   {{ site.data.location[0].Google_Maps_Embed_Code | raw }}
+              </div><!--/content-row-->
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        
+  

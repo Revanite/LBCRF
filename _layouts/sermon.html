@@ -1,0 +1,113 @@
+---
+layout: default
+---
+
+  <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="{{site.url}}index.html">Home</a></li>
+            <li><a href="{{site.url}}sermons.html">Sermons</a></li>
+            <li class="active">{{page.title}}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-10 col-xs-8">
+          <h1>Sermons</h1>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-4"> <a href="{{site.url}}sermons.html" class="pull-right btn btn-primary">All sermons</a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <header class="single-post-header clearfix">
+              <div class="pull-right sermon-actions"> 
+                  {% if page.sermon_mp3 %}
+                    {% for item in page.sermon_mp3 %} <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
+                      <i class="fa fa-headphones"></i></a> 
+                       {% endfor %}
+                    {% endif %}
+                    {% if page.handout %}
+                    {% for item in page.handout %}
+                      <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Read online"><i class="fa fa-file-text-o"></i></a> 
+                      {% endfor %}
+                    {% endif %}
+                    {% if page.slides %}
+                    {% for item in page.slides %}
+                     <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Download PDF"><i class="fa fa-file-powerpoint-o"></i></a>{% endfor %}
+                    {% endif %} 
+                  </div>
+              <h2 class="post-title">{{page.title}}</h2>
+            </header>
+            <article class="post-content">
+              <div class="video-container">
+               {% if page.series_featured_image %}
+                    {% for img in page.series_featured_image %}
+                      <a href="#" class="media-box"> <img src="{{img.url}}" alt="" class="img-thumbnail"> </a>
+                      {% endfor %}
+                {% else %}
+                    <img src="http://placehold.it/560x315?text=sermons+graphic" alt="">
+                {% endif %}
+              </div>
+              {% if page.sermon_mp3 %}
+                    {% for item in page.sermon_mp3 %}
+                <audio controls>
+                     <source src="{{item.url}}" type="audio/mpeg">
+                </audio>
+              {% endfor %}
+              {% endif %}
+
+              {% if  page.body_content %}
+                    {{page.body_content | markdownify }}
+                    {% else %}
+                    <p>No text provided for this message.</p>
+                    {% endif %}
+             
+            </article>
+        
+          </div><!--/col-md-9-->
+          <!-- Start Sidebar -->
+          <div class="col-md-3 sidebar">
+            <div class="widget sidebar-widget">
+              <div class="sidebar-widget-title">
+                <h3>Sermon Series:</h3>
+              </div>
+              <ul>
+                  {% for item in site.data.series %}
+                <li><a href="{{ item.title | datapage_url: 'series' | prepend: site.baseurl | prepend: site.url }}">{{item.title}}</a></li>
+                {% endfor %}
+                
+              </ul>
+            </div>
+            <div class="widget sidebar-widget">
+              <div class="sidebar-widget-title">
+                <h3>More From This Series</h3>
+              </div>
+              <ul>
+                   {% for sermon in site.data.sermons %}
+      {% if sermon.series_title[0] == page.series_title[0] %}
+                <li><a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}">{{sermon.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

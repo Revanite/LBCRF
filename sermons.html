@@ -1,0 +1,106 @@
+---
+layout: default
+---
+<!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="#">Sermons</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-10 col-xs-8">
+          <h1>Sermons</h1>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-4"> <a href="sermons.html" class="pull-right btn btn-primary">All sermons</a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+<!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 sermon-archive"> 
+            <!-- Sermons Listing -->
+            {% for sermon in site.data.sermons %}
+            <article class="post sermon">
+              <header class="post-title">
+                <div class="row">
+                  <div class="col-md-9 col-sm-9">
+                    <h3><a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}">{{sermon.title}}</a></h3>
+                    <span class="meta-data"><i class="fa fa-calendar"></i> Posted on {{sermon.date}} | {{sermon.speaker_name}} </div>
+                  <div class="col-md-3 col-sm-3 sermon-actions">
+                     {% if sermon.sermon_mp3 %}
+                    {% for item in sermon.sermon_mp3 %} <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
+                      <i class="fa fa-headphones"></i></a> 
+                       {% endfor %}
+                    {% endif %}
+                    {% if sermon.handout %}
+                    {% for item in sermon.handout %}
+                      <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Read online"><i class="fa fa-file-text-o"></i></a> 
+                      {% endfor %}
+                    {% endif %}
+                    {% if sermon.slides %}
+                    {% for item in sermon.slides %}
+                     <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Download PDF"><i class="fa fa-file-powerpoint-o"></i></a> </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+              </header>
+              <div class="post-content">
+                <div class="row">
+                  <div class="col-md-4"> <a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}" class="media-box"> 
+                      {% if sermon.series_featured_image %}
+                    {% for img in sermon.series_featured_image %}
+                    <img src="{{img.url}}" alt="{{sermon.series_title}}">
+                    {% endfor %}
+                {% else %}
+                    <img src="http://placehold.it/560x315?text=sermons+graphic" alt="">
+                {% endif %}
+                      </a> </div>
+                  <div class="col-md-8">
+                    {% if  sermon.body_content %}
+                    {{sermon.body_content | markdownify | truncate: 300 }}
+                    {% else %}
+                    <p>Click to listen to this and other sermons.</p>
+                    {% endif %}
+                    <p><a href="{{ sermon.title | datapage_url: 'sermons' | prepend: site.baseurl | prepend: site.url }}" class="btn btn-primary">Continue reading <i class="fa fa-long-arrow-right"></i></a></p>
+                  </div>
+                </div>
+              </div>
+            </article>
+        {% endfor %}
+
+          </div><!--/sermon archive-->
+          <!-- Start Sidebar -->
+          <div class="col-md-4 sidebar">
+            <div class="widget sidebar-widget">
+              <div class="sidebar-widget-title">
+                <h3>Sermon Series:</h3>
+              </div>
+              <ul>
+                  {% for item in site.data.series %}
+                <li><a href="{{ item.title | datapage_url: 'series' | prepend: site.baseurl | prepend: site.url }}">{{item.title}}</a></li>
+                {% endfor %}
+                
+              </ul>
+            </div>
+
+
+          </div><!--/sidebar-->
+        </div><!--/row-->
+      </div><!--/container-->
+    </div><!--/content-->
+  </div><!--/main-->

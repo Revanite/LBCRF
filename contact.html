@@ -1,0 +1,84 @@
+---
+layout: default
+---
+ <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Contact</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Contact</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <header class="single-post-header clearfix">
+              <h2 class="post-title">Contact Us</h2>
+            </header>
+            <div class="post-content">
+              <div id="gmap">
+                {{ site.data.location[0].Google_Maps_Embed_Code | raw }}
+              </div>
+              <div class="row">
+                  {% if  site.data.contact_page[0].Content %}
+                  {{ site.data.contact_page[0].Content | markdownify }}
+                  {% endif %}
+                   <div class="address">
+            <p><i class="fa fa-map-marker"></i>  {{site.data.location[0].Street_Address}} {{site.data.location[0].Street_Address2}} {{site.data.location[0].City }}, {{site.data.location[0].State }} {{site.data.location[0].Zip }} <br>
+                <i class="fa fa-phone"></i>  {{site.data.contact[0].Phone }} <br>
+                <i class="fa fa-envelope"></i>  {{site.data.contact[0].Church_email }} 
+                <hr>
+              </div>
+              <div class="row">
+                <form method="post" id="contactform" name="contactform" class="contact-form" action="mail/contact.php">
+                  <div class="col-md-6 margin-15">
+                    <div class="form-group">
+                      <input type="text" id="name" name="name"  class="form-control input-lg" placeholder="Name*">
+                    </div>
+                    <div class="form-group">
+                      <input type="email" id="email" name="email"  class="form-control input-lg" placeholder="Email*">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" id="phone" name="phone" class="form-control input-lg" placeholder="Phone">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <textarea cols="6" rows="7" id="comments" name="comments" class="form-control input-lg" placeholder="Message"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <input id="submit" name="submit" type="submit" class="btn btn-primary btn-lg pull-right" value="Submit now!">
+                  </div>
+                </form>
+                <div class="clearfix"></div>
+                <div class="col-md-12">
+                  <div id="message"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

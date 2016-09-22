@@ -1,0 +1,87 @@
+# What's the name of the church?
+title: Liberty Baptist Church of Rock Falls IL
+# Give a brief description of the church
+description: > # this means to ignore newlines until "baseurl:"
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus blanditiis odio corrupti, 
+    illum architecto consequuntur, quaerat unde repudiandae qui temporibus! Fuga maxime molestiae hic impedit 
+    sit sint perferendis rerum unde.
+# Leave this alone
+baseurl: "" # the subpath of your site, e.g. /blog
+# Change this to the domain when you are finished and ready to publish.
+
+url: "http://localhost:3000/" # the base hostname & protocol for your site | Switch to http://cranesvillebiblechurch.com/" Before running Glynn.  Afterwards change it back to http://localhost:4000/
+
+# This is the path to the default images.  If you add different default images you can change them here.
+default_header_image: "assets/default_header.jpg"
+default_sermon_image: "assets/default_header.jpg"
+default_blog_image: "assets/default_header.jpg"
+default_about_image: "assets/default_header.jpg"
+default_ministry_image: "assets/default_header.jpg"
+default_calendar_image: "assets/calendar_default.jpg"
+
+
+# Airtable API Stuff
+airtable:
+  apikey: "keyRTLlrVS02vC3Vx"
+  blog: "appACbXiUkUT1U016"
+  sermons: "app6SdRlqjbQm06Qt"
+  series: "app6SdRlqjbQm06Qt"
+  ministries: "appOQzne2MxFg9pM5"
+  photos: "appOQzne2MxFg9pM5"
+  events: "appOQzne2MxFg9pM5"
+  abouts: "app9qZCQnCyJeurBh"
+  slider: "appLYLHvndyaKqm7l"
+  welcome: "appXyWFyYs21QVkeV"
+  info: "app1GAJw5K0tTQINQ"
+  contact: "appioRCiUVj0Tcg4M"
+
+# LEAVE EVERYTHING ELSE ALONE!!
+
+# Build settings
+markdown: kramdown
+ 
+# Exclude
+exclude:
+  - package.json
+  - node_modules
+  - gulpfile.js 
+  - bower_components
+keep_files:
+  - css
+
+
+page_gen:
+  - data: 'ministries'
+    template: 'ministries'
+    name: 'name'
+    dir: 'ministries'
+  - data: 'series'
+    template: 'series'
+    name: 'title'
+    dir: 'series'
+  - data: 'sermons'
+    template: 'sermon'
+    name: 'title'
+    dir: 'sermons'
+  - data: 'blog'
+    template: 'blog-entry'
+    name: 'title'
+    dir: 'blog-posts'
+  - data: 'abouts'
+    template: 'aboutpage'
+    name: 'title'
+    dir: 'about-us'
+  - data: 'events'
+    template: 'event'
+    name: 'event_name'
+    dir: 'events'
+  - data: 'abouts'
+    template: 'about'
+    name: 'title'
+    dir: 'about-us'
+
+ftp_host: 'biblebaptistmattoon.org'
+ftp_dir: 'blessedhopemtvernon.org/'
+ftp_passive: false
+ftp_username: 'ryahay11'
+ftp_password: '@88Volvocj'

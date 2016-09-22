@@ -1,0 +1,165 @@
+---
+layout: default
+---
+{% for item in site.data.events %}
+    {% if  item.ministry_name[0] == page.title  %}
+        {% assign Events = true %}
+    {% endif %}
+{% endfor %}
+{% for item in site.data.photos %}
+    {% if  item.ministry_name[0] == page.title  %}
+        {% assign Photos = true %}
+    {% endif %}
+{% endfor %}
+
+  <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Ministries</a></li>
+            <li class="active">{{page.title}}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Ministries</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <header class="single-post-header clearfix">
+              <h2 class="post-title">{{page.title}}</h2>
+            </header>
+            <div class="post-content">
+                {% if  page.featured_image%}
+                {% else %}
+            	<img src="{{site.url}}{{site.default_ministry_image}}"  class="img-thumbnail">
+                {% endif %}
+               <div class="spacer-30"></div>
+               <div class="panel ministry-details" style="border: 2px solid #333333;">
+                  <div class="panel-body">
+                  <h3>Ministry Details</h3>
+                  <div class="row">
+                  {% if page.leader_name %}
+                    <div class="col-sm-6">
+                  {% endif %}
+                  
+                  <h4 style="padding-left: 10px;">Where, When &amp; Who:</h4>
+                  <ul style="padding-left: 10px;">
+                    <li><i class="fa fa-map-marker"></i> <strong>Where:</strong> {{page.meeting_place}}</li>
+                    <li><i class="fa fa-clock-o"></i> <strong>When:</strong> {{page.meeting_time}}</li>
+                    <li><i class="fa fa-users"></i> <strong>Who:</strong> {{page.group}}</li>
+                  </ul>
+
+                  {% if page.leader_name %}
+                  </div>
+                  <div class="col-sm-6">
+                  <h4>Ministry Leader:</h4>
+                  <div class="row">
+                    <div class="col-sm-8">
+                  <h5>{{ page.leader_name }}</h5>
+                  <p>{{page.leader_bio}}</p>
+                  <hr>
+                  <ul>
+                      {% if  page.leader_phone%}
+                    <li><i class="fa fa-phone"></i> {{page.leader_phone}}</li>
+                      {% endif %}
+                      {% if  page.leader_email %}
+                    <li><i class="fa fa-envelope"></i> {{page.leader_email}}</li>
+                      {% endif %}
+                  </ul>
+
+                  </div>
+                  <div class="col-sm-4">
+                {% if page.leader_thumbnail %}
+                    {% for img in page.leader_thumbnail %}
+                  <img src="{{ img.url }}" class="thumbnail" alt="">
+                    {% endfor %}
+                {% endif %}
+                </div>
+                </div><!--/row-->
+                </div>
+                  {% endif %}
+                  </div>
+                </div><!--/panel-body-->
+                </div><!--/panel-->
+               <div class="spacer-30"></div>
+                {% if page.body_content %}
+                {{page.body_content | markdownify }}
+                {% endif %}
+            </div>
+          </div>
+          <!-- Start Sidebar -->
+          <div class="col-md-4 sidebar">
+              {% if  Photos%}
+            <!-- Photo Gallery Widget -->
+            <div class="widget-gallery widget">
+              <div class="sidebar-widget-title">
+                <h3>Latest Gallery Items</h3>
+              </div>
+              <ul>
+                  {% for group in site.data.photos  limit: 1 %}
+            {% if group.ministry_name[0] == page.title %}
+             {% for img in group.gallery  limit: 6 %}   
+                <li> <a href="{{img.url}}" class="media-box post-image" data-rel="prettyPhoto[galwid]"> <img src="{{img.thumbnails.large.url}}" alt="" class="img-thumbnail"> </a></li>
+                       {% endfor %} <!--/end individual images-->
+            {% else %}
+            <p>No recent {{page.title}} pictures to show.</p>
+            {% endif %}
+
+          {% endfor %} <!--/ end gallery loop -->     
+              </ul>
+            </div>
+                          {% endif %}
+
+            <div class="widget-upcoming-events widget">
+              {% if  Events%}
+              <div class="sidebar-widget-title">
+                <h3>Ministry Events</h3>
+              </div>
+              
+                  {% endif %}
+              <ul>
+                   {% for event in site.data.events %}
+            {% if  event.ministry_name[0] == page.title  %}
+            {% assign counter2 = 0 %}
+            {% assign maxPostCount2 = 3 %}
+            {% if counter2 < maxPostCount2 %}
+            
+                <li class="item event-item clearfix">
+                  <div class="event-date"> <span class="date">{{event.DateTime | date: "%d"}}</span> <span class="month">{{event.DateTime | date: "%b"}}</span> </div>
+                  <div class="event-detail">
+                    <h4><a href="{{ event.event_name | datapage_url: 'events' | prepend: site.baseurl | prepend: site.url }}">{{ event.event_name }}</a></h4>
+                    <span class="event-dayntime meta-data">{% if event.description  %}
+                    {{ event.description | markdownify | truncate: 140 }}
+                    {% endif %}</span> </div>
+                </li>
+                
+                {% assign counter2=counter2 | plus:1 %}
+               {% endif %}
+               {% endif %}
+      {% endfor %}  
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

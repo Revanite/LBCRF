@@ -1,0 +1,74 @@
+---
+layout: default
+---
+  <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li class="active">{{page.title}}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-10 col-xs-8">
+          <h1>Events</h1>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-4"> <a href="{{site.url}}calendar-list.html" class="pull-right btn btn-primary">All events</a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <header class="single-post-header clearfix">
+              <nav class="btn-toolbar pull-right"> <a href="#" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-original-title="Print" ><i class="fa fa-print"></i></a> <a href="#" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-original-title="Contact us" ><i class="fa fa-envelope"></i></a> <a href="#" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-original-title="Share event" ><i class="fa fa-location-arrow"></i></a> </nav>
+              <h2 class="post-title">{{page.title}}</h2>
+            </header>
+            <article class="post-content">
+                       {% if  page.featured_image %}
+        {% for img in page.featured_image %}
+        <img src="{{img.url}}" alt="{{page.event_name}}" class="img-responsive">
+        {% endfor %}
+        {% else %}
+        <img src="{{site.default_calendar_image}}" alt="" class="img-responsive">
+        {% endif %} 
+              <div class="event-description"> 
+              </div>
+                <div class="spacer-20"></div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Event details</h3>
+                      </div>
+                      <div class="panel-body">
+                        <ul class="info-table">
+                          <li><i class="fa fa-calendar"></i> <strong>{{page.DateTime | date: "%A"}}</strong> | {{page.DateTime | date: "%b %d, %y" }}</li> 
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                            {% if  page.body_content %}
+                    {{ page.body_content | markdownify }}
+                    {% else %}
+                    <p>Check back soon for more details.</p>
+                    {% endif %}
+              </div>
+            </article>
+          </div>
+      </div>
