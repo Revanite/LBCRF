@@ -38,9 +38,9 @@ layout: default
             <header class="single-post-header clearfix">
               <div class="pull-right sermon-actions"> 
                   {% if page.sermon_mp3 %}
-                    {% for item in page.sermon_mp3 %} <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
+                     <a href="{{page.sermon_mp3}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
                       <i class="fa fa-headphones"></i></a> 
-                       {% endfor %}
+                       
                     {% endif %}
                     {% if page.handout %}
                     {% for item in page.handout %}
@@ -65,11 +65,11 @@ layout: default
                 {% endif %}
               </div>
               {% if page.sermon_mp3 %}
-                    {% for item in page.sermon_mp3 %}
+                    
                 <audio controls>
-                     <source src="{{item.url}}" type="audio/mpeg">
+                     <source src="{{page.sermon_mp3}}" type="audio/mpeg">
                 </audio>
-              {% endfor %}
+              
               {% endif %}
 
               {% if  page.body_content %}

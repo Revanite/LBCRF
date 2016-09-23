@@ -56,9 +56,9 @@ layout: default
                     <span class="meta-data"><i class="fa fa-calendar"></i> Posted on {{sermon.date}} | {{sermon.speaker_name}} </div>
                   <div class="col-md-3 col-sm-3 sermon-actions">
                      {% if sermon.sermon_mp3 %}
-                    {% for item in sermon.sermon_mp3 %} <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
+                    <a href="{{sermon.sermon_mp3}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
                       <i class="fa fa-headphones"></i></a> 
-                       {% endfor %}
+                       
                     {% endif %}
                     {% if sermon.handout %}
                     {% for item in sermon.handout %}

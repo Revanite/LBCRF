@@ -98,9 +98,9 @@ layout: default
                     <p>Click to listen to this and other sermons.</p>
                     {% endif %}
                     <div class="sermon-actions"> {% if sermon.sermon_mp3 %}
-                    {% for item in sermon.sermon_mp3 %} <a href="{{item.url}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
+                     <a href="{{if sermon.sermon_mp3}}" data-placement="top" data-toggle="tooltip" data-original-title="Audio"> 
                       <i class="fa fa-headphones"></i></a> 
-                       {% endfor %}
+                       
                     {% endif %}
                     {% if sermon.handout %}
                     {% for item in sermon.handout %}
