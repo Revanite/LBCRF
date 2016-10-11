@@ -2,18 +2,53 @@
 layout: default
 ---
 
-<div class="gallery-page">
-        <h2>Recent Photos</h2>
-        <div class="gallery-files">
-        {% for group in site.data.photos %}
-        <h3>{{group.title}}</h3>
-        <div class="gallery-group">
-            {% for img in group.gallery %}          
-        <a class="gallery thumbnail" href="{{img.url}}">
-                    <img src="{{img.thumbnails.large.url}}" width="150" height="150" />
-        </a><!--/gallery-item-->
-            {% endfor %} <!--/end individual images-->
-             </div><!--/gallery-group-->
-          {% endfor %} <!--/ end gallery loop -->  
-        </div><!--/gallery-files-->
-        </div><!--/gallery-page-->
+<!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="{{site.url}}index.html">Home</a></li>
+            <li><a href="#">Media</a></li>
+            <li class="active">Gallery</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-10 col-xs-8">
+          <h1>Gallery</h1>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-4"> <a href="{{site.url}}sermons.html" class="pull-right btn btn-primary">All sermons</a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Body Content -->
+  	<div class="main" role="main">
+    	<div id="content" class="content full">
+      		<div class="container">
+                <div class="row">
+                {% for gallery in site.data.photos limit: 5 %}
+                
+                <h3>{{gallery.title}}</h3>
+                <hr class="sm">
+                  	<ul class="sort-destination isotope-grid" data-sort-id="gallery">
+                        {% for photo in gallery.gallery %}
+                        
+                    	<li class="col-md-3 col-sm-3 grid-item format-image">
+                      		<div class="grid-item-inner"> <a href="{{photo.url}}" data-rel="prettyPhoto" class="media-box"> <img src="{{photo.thumbnails.large.url}}" alt=""> </a> </div>
+                    	</li>
+                        {% endfor %}
+                  	</ul><!--/isotope grid-->
+                      {% endfor %}
+           		</div><!--/row-->
+         	</div><!--/container-->
+        </div><!--/content-->
+   	</div><!--/main-->
+    <!-- End Body Content -->
